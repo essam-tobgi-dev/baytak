@@ -1,0 +1,52 @@
+<div id="<%= dom_id property %>" class="w-full sm:w-auto my-5 space-y-5">
+  <div>
+    <strong class="block font-medium mb-1">Name:</strong>
+    <%= property.name %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Property type:</strong>
+    <%= property.property_type %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Area:</strong>
+    <%= property.area %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Price:</strong>
+    <%= property.price %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Bedrooms:</strong>
+    <%= property.bedrooms %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Bathrooms:</strong>
+    <%= property.bathrooms %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Floor number:</strong>
+    <%= property.floor_number %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Status:</strong>
+    <%= property.status %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Delivery date:</strong>
+    <%= property.delivery_date %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Description:</strong>
+    <%= property.description %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Images:</strong>
+    <% property.images.each do |image| %>
+      <div><%= link_to image.filename, image, class: "text-gray-700 underline hover:no-underline" %></div>
+    <% end %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Project:</strong>
+    <%= property.project_id %>
+  </div>
+</div>
