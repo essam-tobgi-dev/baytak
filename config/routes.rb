@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "properties_feed/show"
   resources :properties
   resources :projects
   get "home/index"
