@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "errors/not_found"
   get "properties_feed/show"
   resources :properties
   resources :projects
@@ -16,4 +17,5 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root to: "home#index"
+  match "*path", to: "errors#not_found", via: :all
 end
