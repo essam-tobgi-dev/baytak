@@ -13,9 +13,8 @@
     <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
     <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
 
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
+    <link rel="icon" href="<%= asset_path('logo-transparent.png') %>" type="image/png">
+    <link rel="apple-touch-icon" href="<%= asset_path('logo-transparent.png') %>">
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
@@ -23,71 +22,139 @@
   </head>
 
   <body>
-    <nav class="bg-gray-800">
-      <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-        <div class="relative flex h-16 items-center justify-between">
-          <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-            <!-- Mobile menu button-->
-            <button type="button" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset" aria-controls="mobile-menu" aria-expanded="false">
-              <span class="absolute -inset-0.5"></span>
-              <span class="sr-only">Open main menu</span>
-              <!--
-                Icon when menu is closed.
+    <nav class="fixed top-0 left-0 w-full z-50 bg-white shadow-md h-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          
+          <!-- Logo -->
+          <div class="flex items-center">
+            <a href="/" class="flex items-center space-x-2">
+              <img class="h-10 w-auto" src="<%= asset_path 'logo-transparent.png' %>" alt="Baytak Logo">
+              <span class="text-xl font-bold text-gray-800">Baytak</span>
+            </a>
+          </div>
 
-                Menu open: "hidden", Menu closed: "block"
-              -->
-              <svg class="block size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-              </svg>
-              <!--
-                Icon when menu is open.
+          <!-- Desktop Navigation -->
+          <div class="hidden md:flex space-x-6">
+            <%= link_to "Home", "#", class: "text-gray-700 hover:text-blue-600 font-medium transition" %>
+            <%= link_to "About Us", "#", class: "text-gray-700 hover:text-blue-600 font-medium transition" %>
+            <%= link_to "Properties", "#", class: "text-gray-700 hover:text-blue-600 font-medium transition" %>
+            <%= link_to "Services", "#", class: "text-gray-700 hover:text-blue-600 font-medium transition" %>
+          </div>
 
-                Menu open: "block", Menu closed: "hidden"
-              -->
-              <svg class="hidden size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+          <!-- Auth & User Info -->
+          <div class="hidden md:flex items-center space-x-4">
+            <% if user_signed_in? %>
+              <span class="text-gray-700 text-sm">
+                Welcome👋 
+                <a href="<%= edit_user_registration_path %>" class="text-blue-600 font-semibold hover:underline">
+                  <%= current_user.email.split("@").first %>
+                </a>
+              </span>
+              <%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete }, class: "bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md text-sm font-medium transition" %>
+            <% else %>
+              <%= link_to "Login", new_user_session_path, class: "bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition" %>
+              <%= link_to "Sign Up", new_user_registration_path, class: "bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md text-sm font-medium transition" %>
+            <% end %>
+          </div>
+
+          <!-- Mobile menu button -->
+          <div class="md:hidden flex items-center">
+            <button type="button" class="text-gray-600 hover:text-blue-600 focus:outline-none" id="mobile-menu-button">
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
               </svg>
             </button>
           </div>
-          <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-            <div class="flex shrink-0 items-center">
-              <img class="h-8 w-auto" src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
-            </div>
-            <div class="hidden sm:ml-6 sm:block">
-              <div class="flex space-x-4">
-                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                <a href="#" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white" aria-current="page">Home</a>
-                <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">About Us</a>
-                <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Properties</a>
-                <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Services</a>
-              </div>
-            </div>
-          </div>
-          <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            <% if user_signed_in?	%>
-              <div class="text-white">
-                <%= current_user.username %>
-                <%= button_to  'Logout', destroy_user_session_path, method: :delete, class: "w-20 relative rounded bg-red-800 p-1 text-white focus:ring-2 focus:ring-white" %>
-              </div>
-            <% else %>
-              <button type="button" class="w-20 relative rounded bg-blue-800 p-1 text-white focus:ring-2 focus:ring-white"
-                onclick="window.location.href='<%= new_user_session_path %>'">
-                Login
-              </button>
-            <% end %>
+        </div>
+      </div>
 
-            <!-- Profile dropdown -->
-            <div class="relative ml-3">
-              
+      <!-- Mobile Menu (hidden by default) -->
+      <div class="md:hidden hidden px-4 pb-4" id="mobile-menu">
+        <div class="space-y-2">
+          <%= link_to "Home", "#", class: "block text-gray-700 hover:text-blue-600 font-medium" %>
+          <%= link_to "About Us", "#", class: "block text-gray-700 hover:text-blue-600 font-medium" %>
+          <%= link_to "Properties", "#", class: "block text-gray-700 hover:text-blue-600 font-medium" %>
+          <%= link_to "Services", "#", class: "block text-gray-700 hover:text-blue-600 font-medium" %>
+
+          <% if user_signed_in? %>
+            <div class="pt-2 border-t">
+              <span class="block text-gray-700 text-sm">
+                Welcome, 
+                <a href="<%= edit_user_registration_path %>" class="text-blue-600 font-semibold hover:underline">
+                  <%= current_user.email.split("@").first %>
+                </a>
+              </span>
+              <%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete }, class: "mt-2 inline-block bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md text-sm font-medium transition" %>
             </div>
-          </div>
+          <% else %>
+            <%= link_to "Login", new_user_session_path, class: "block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition" %>
+            <%= link_to "Sign Up", new_user_registration_path, class: "block bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md text-sm font-medium transition" %>
+          <% end %>
         </div>
       </div>
     </nav>
-    <main class="container mx-auto flex">
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const button = document.getElementById('mobile-menu-button');
+        const menu = document.getElementById('mobile-menu');
+        button.addEventListener('click', () => {
+          menu.classList.toggle('hidden');
+        });
+      });
+    </script>
+
+    <main class="mt-16">
+      <div id="flash-container" class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-md px-4 mt-16">
+        <% if notice.present? %>
+          <div id="flash-notice" class="bg-green-100 border border-green-300 text-green-800 px-4 py-3 rounded-lg shadow-md flex items-center space-x-3 animate-fade-in-down">
+            <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+            </svg>
+            <p><%= notice %></p>
+          </div>
+        <% end %>
+
+        <% if alert.present? %>
+          <div id="flash-alert" class="bg-red-100 border border-red-300 text-red-800 px-4 py-3 rounded-lg shadow-md flex items-center space-x-3 animate-fade-in-down">
+            <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 5.636l-1.414 1.414M5.636 18.364l1.414-1.414M6 12h.01M18 12h.01M12 6h.01M12 18h.01"/>
+            </svg>
+            <p><%= alert %></p>
+          </div>
+        <% end %>
+      </div>
+
+      <script>
+        document.addEventListener("DOMContentLoaded", () => {
+          setTimeout(() => {
+            const notice = document.getElementById("flash-notice");
+            const alert = document.getElementById("flash-alert");
+
+            [notice, alert].forEach(el => {
+              if (el) {
+                el.classList.add("fade-out");
+                setTimeout(() => el.remove(), 1000);
+              }
+            });
+          }, 5000);
+        });
+      </script>
       <%= yield %>
     </main>
+    <footer class="bg-gray-800 text-white py-10 px-6">
+      <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+        <div>
+          <h3 class="text-xl font-semibold">Baytak</h3>
+          <p class="text-gray-400 mt-2">© <%= Time.now.year %> All rights reserved.</p>
+        </div>
+        <div class="flex gap-6 mt-4 md:mt-0">
+          <a href="#" class="text-gray-400 hover:text-white">About</a>
+          <a href="#" class="text-gray-400 hover:text-white">Contact</a>
+          <a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
