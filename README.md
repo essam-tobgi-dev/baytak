@@ -21,6 +21,7 @@
 * **Image Uploads**: Upload multiple images for properties and projects to provide visual context.
 * **Responsive Design**: Mobile-friendly interface with Tailwind CSS for seamless user experience across devices.
 * **Validation and Error Handling**: Robust form validations with user-friendly error messages.
+* **AI Powered Assistant** Baytak is enhanced with AI powered assistant that integrated with app database to improve user experience
 
 ## 🛠 Tech Stack
 
@@ -44,6 +45,9 @@
 ![project](https://github.com/user-attachments/assets/caa2b8eb-6927-4821-b241-a48e5f1c25f8)
 
 ![property](https://github.com/user-attachments/assets/2242ba00-d289-4716-8735-1d3b1a01ffce)
+
+![assistant](https://github.com/user-attachments/assets/673fadd2-e2b2-45c1-b09a-4bfb19465dc6)
+
 
 ## 🚀 Getting Started
 
