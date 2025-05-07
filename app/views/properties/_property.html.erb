@@ -1,52 +1,87 @@
-<div id="<%= dom_id property %>" class="w-full sm:w-auto my-5 space-y-5">
-  <div>
-    <strong class="block font-medium mb-1">Name:</strong>
-    <%= property.name %>
+<div id="<%= dom_id property %>" class="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-6 sm:p-10 my-8 space-y-6 border border-gray-200">
+  <!-- Header -->
+  <div class="flex items-center justify-between border-b pb-4">
+    <img src=<%= asset_path("logo-transparent.png") %> alt="Baytak Logo" class="w-12 h-12">
   </div>
-  <div>
-    <strong class="block font-medium mb-1">Property type:</strong>
-    <%= property.property_type %>
+
+  <!-- Property Fields -->
+  <div class="mt-6">
+    <strong class="block text-gray-600 font-semibold mb-2">Property Schematic:</strong>
+    <img src=<%= asset_path("property.png")%> alt="Modern Project Banner" class="rounded-xl shadow w-full max-h-96 object-cover">
   </div>
-  <div>
-    <strong class="block font-medium mb-1">Area:</strong>
-    <%= property.area %>
+  <div class="grid sm:grid-cols-2 gap-6">
+    <!-- External Project Banner Image -->
+    <div>
+      <strong class="block text-gray-600 font-semibold mb-1">Name:</strong>
+      <p class="text-gray-800"><%= property.name %></p>
+    </div>
+
+    <div>
+      <strong class="block text-gray-600 font-semibold mb-1">Property type:</strong>
+      <p class="text-gray-800"><%= property.property_type %></p>
+    </div>
+
+    <div>
+      <strong class="block text-gray-600 font-semibold mb-1">Area:</strong>
+      <p class="text-gray-800"><%= property.area %></p>
+    </div>
+
+    <div>
+      <strong class="block text-gray-600 font-semibold mb-1">Price:</strong>
+      <p class="text-gray-800"><%= property.price %></p>
+    </div>
+
+    <div>
+      <strong class="block text-gray-600 font-semibold mb-1">Bedrooms:</strong>
+      <p class="text-gray-800"><%= property.bedrooms %></p>
+    </div>
+
+    <div>
+      <strong class="block text-gray-600 font-semibold mb-1">Bathrooms:</strong>
+      <p class="text-gray-800"><%= property.bathrooms %></p>
+    </div>
+
+    <div>
+      <strong class="block text-gray-600 font-semibold mb-1">Floor number:</strong>
+      <p class="text-gray-800"><%= property.floor_number %></p>
+    </div>
+
+    <div>
+      <strong class="block text-gray-600 font-semibold mb-1">Status:</strong>
+      <p class="text-gray-800"><%= property.status %></p>
+    </div>
+
+    <div>
+      <strong class="block text-gray-600 font-semibold mb-1">Delivery date:</strong>
+      <p class="text-gray-800"><%= property.delivery_date %></p>
+    </div>
+
+    <div>
+      <strong class="block text-gray-600 font-semibold mb-1">Project ID:</strong>
+      <p class="text-gray-800"><%= property.project_id %></p>
+    </div>
   </div>
+
+  <!-- Description -->
   <div>
-    <strong class="block font-medium mb-1">Price:</strong>
-    <%= property.price %>
+    <strong class="block text-gray-600 font-semibold mb-1">Description:</strong>
+    <p class="text-gray-700 leading-relaxed"><%= property.description %></p>
   </div>
-  <div>
-    <strong class="block font-medium mb-1">Bedrooms:</strong>
-    <%= property.bedrooms %>
-  </div>
-  <div>
-    <strong class="block font-medium mb-1">Bathrooms:</strong>
-    <%= property.bathrooms %>
-  </div>
-  <div>
-    <strong class="block font-medium mb-1">Floor number:</strong>
-    <%= property.floor_number %>
-  </div>
-  <div>
-    <strong class="block font-medium mb-1">Status:</strong>
-    <%= property.status %>
-  </div>
-  <div>
-    <strong class="block font-medium mb-1">Delivery date:</strong>
-    <%= property.delivery_date %>
-  </div>
-  <div>
-    <strong class="block font-medium mb-1">Description:</strong>
-    <%= property.description %>
-  </div>
-  <div>
-    <strong class="block font-medium mb-1">Images:</strong>
-    <% property.images.each do |image| %>
-      <div><%= link_to image.filename, image, class: "text-gray-700 underline hover:no-underline" %></div>
-    <% end %>
-  </div>
-  <div>
-    <strong class="block font-medium mb-1">Project:</strong>
-    <%= property.project_id %>
-  </div>
+
+  <!-- Uploaded Images -->
+  <% if property.images.attached? %>
+    <div>
+      <strong class="block text-gray-600 font-semibold mb-2">Property Images:</strong>
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <% property.images.each do |image| %>
+          <div class="bg-gray-50 p-2 rounded-lg shadow border border-gray-100">
+            <%= image_tag image, class: "rounded-md w-full object-cover h-48" %>
+            <div class="mt-2 text-sm text-center">
+              <%= link_to image.filename, rails_blob_path(image, disposition: "attachment"), class: "text-blue-600 hover:underline" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 </div>
