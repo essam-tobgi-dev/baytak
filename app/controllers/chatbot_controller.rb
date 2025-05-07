@@ -1,4 +1,4 @@
-require_dependency 'langchain_service'
+require_dependency "langchain_service"
 
 class ChatbotController < ApplicationController
   def index

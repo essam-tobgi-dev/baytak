@@ -1,4 +1,4 @@
-require 'sequel'
+require "sequel"
 
 class LangchainService
   def initialize
@@ -9,9 +9,8 @@ class LangchainService
     @assistant = Langchain::Assistant.new(
       llm: @model,
       instructions: load_system_prompt,
-      tools: [Langchain::Tool::Database.new(connection_string: "sqlite://#{Rails.root.join('storage', 'development.sqlite3')}")]
+      tools: [ Langchain::Tool::Database.new(connection_string: "sqlite://#{Rails.root.join('storage', 'development.sqlite3')}") ]
     )
-    
   end
 
   def generate_response(user_input)

@@ -50,7 +50,7 @@
     aiWrapper.className = "flex justify-start";
     aiWrapper.innerHTML = `
       <div class="bg-blue-100 text-blue-800 p-3 rounded-lg w-fit max-w-[80%]">
-        <strong>AI:</strong> ${response.response}
+        <strong>AI:</strong> ${marked.parse(response.response)}
       </div>
     `;
     log.appendChild(aiWrapper);
