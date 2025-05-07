@@ -40,6 +40,7 @@
             <%= link_to "About Us", "/about", class: "block text-gray-700 hover:text-blue-600 font-medium" %>
             <%= link_to "Projects", projects_path, class: "block text-gray-700 hover:text-blue-600 font-medium" %>
             <%= link_to "Properties", properties_path, class: "block text-gray-700 hover:text-blue-600 font-medium" %>
+            <%= link_to "AI Assistant", "/chatbot", class: "block text-gray-700 hover:text-blue-600 font-medium" %>
           </div>
 
           <!-- Auth & User Info -->
@@ -76,6 +77,7 @@
           <%= link_to "About Us", "/about", class: "block text-gray-700 hover:text-blue-600 font-medium" %>
           <%= link_to "Projects", projects_path, class: "block text-gray-700 hover:text-blue-600 font-medium" %>
           <%= link_to "Properties", properties_path, class: "block text-gray-700 hover:text-blue-600 font-medium" %>
+          <%= link_to "AI Assistant", "/chatbot", class: "block text-gray-700 hover:text-blue-600 font-medium" %>
 
           <% if user_signed_in? %>
             <div class="pt-2 border-t">
@@ -105,7 +107,7 @@
       });
     </script>
 
-    <main class="mt-16 flex-grow">
+    <main class="mt-16 flex-grow bg-gradient-to-tl from-amber-200 to-amber-50">
       <div id="flash-container" class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-md px-4 mt-16">
         <% if notice.present? %>
           <div id="flash-notice" class="bg-green-100 border border-green-300 text-green-800 px-4 py-3 rounded-lg shadow-md flex items-center space-x-3 animate-fade-in-down">

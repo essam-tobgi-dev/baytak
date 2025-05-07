@@ -1,0 +1,60 @@
+<div class="max-w-5xl mx-auto bg-white shadow-lg rounded-2xl p-6 my-16 border border-gray-200 space-y-4">
+  <h2 class="text-2xl font-bold text-gray-800 mb-4">🤖 Baytak AI Assistant</h2>
+  
+  <div id="chat-log" class="space-y-2 min-h-[200px] max-h-[400px] overflow-y-auto border rounded-lg p-4 bg-gray-50">
+      <!-- Initial AI Message -->
+      <div class="flex justify-start">
+      <div class="bg-blue-100 text-blue-800 p-3 rounded-lg w-fit max-w-[80%]">
+      <strong>AI:</strong> Hello, how can I help you today?
+      </div>
+      </div>
+  </div>
+  
+  
+  <form id="chat-form" class="flex space-x-2 mt-4">
+      <input type="text" name="message" id="message" placeholder="Type your message..." class="flex-1 border rounded-lg px-3 py-2">
+      <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Send</button>
+  </form>
+</div>
+
+<script>
+  document.getElementById("chat-form").addEventListener("submit", async function(e) {
+    e.preventDefault();
+    const input = document.getElementById("message");
+    const userMessage = input.value.trim();
+    if (!userMessage) return;
+
+    const log = document.getElementById("chat-log");
+
+    const userWrapper = document.createElement("div");
+    userWrapper.className = "flex justify-end";
+    userWrapper.innerHTML = `
+      <div class="bg-gray-100 text-gray-800 p-3 rounded-lg w-fit max-w-[80%]">
+        <strong>You:</strong> ${userMessage}
+      </div>
+    `;
+    log.appendChild(userWrapper);
+
+    input.value = "";
+
+    const response = await fetch("/chatbot/message", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-Token": document.querySelector("[name=csrf-token]").content
+      },
+      body: JSON.stringify({ message: userMessage })
+    }).then(res => res.json());
+
+    const aiWrapper = document.createElement("div");
+    aiWrapper.className = "flex justify-start";
+    aiWrapper.innerHTML = `
+      <div class="bg-blue-100 text-blue-800 p-3 rounded-lg w-fit max-w-[80%]">
+        <strong>AI:</strong> ${response.response}
+      </div>
+    `;
+    log.appendChild(aiWrapper);
+
+    log.scrollTop = log.scrollHeight;
+  });
+</script>

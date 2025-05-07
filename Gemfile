@@ -67,3 +67,11 @@ end
 # Authentication
 gem "devise", "~> 4.9"
 gem "tailwind_devise", "~> 0.0.3"
+
+gem "langchainrb", "~> 0.19.5"
+
+gem "dotenv-rails", "~> 3.1"
+
+gem "sequel", "~> 5.92"
+
+gem "ruby-openai", "~> 8.1"
