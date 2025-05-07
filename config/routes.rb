@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   root to: "home#index"
   get "/about", to: "home#about"
   get "/chatbot", to: "chatbot#index"
+  get "privacy-policy", to: "home#privacy"
   post "/chatbot/message", to: "chatbot#message"
   match "*path", to: "errors#not_found", via: :all
 end
