@@ -46,7 +46,7 @@
 
 ![property](https://github.com/user-attachments/assets/2242ba00-d289-4716-8735-1d3b1a01ffce)
 
-![assistant](https://github.com/user-attachments/assets/673fadd2-e2b2-45c1-b09a-4bfb19465dc6)
+![image](https://github.com/user-attachments/assets/a386fba2-aedc-4e08-aab9-3f94e8a6cc9d)
 
 
 ## 🚀 Getting Started
