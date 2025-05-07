@@ -128,6 +128,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 For questions or suggestions, feel free to reach out:
 
-* **GitHub**: [essam-tobgi-dev](https://github.com/essam-tobgi-dev)
-
----
+* **LinkedIn**: [essam-eltobgi](https://www.linkedin.com/in/essam-eltobgi/)
