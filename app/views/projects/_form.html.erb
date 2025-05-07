@@ -1,9 +1,14 @@
-<%= form_with(model: project, class: "contents") do |form| %>
-  <% if project.errors.any? %>
-    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
-      <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
+<%= form_with(model: project, class: "max-w-4xl mx-auto bg-white rounded-xl shadow-md px-6 py-8") do |form| %>
+  <h1 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-8 border-b pb-2">
+    <%= project.new_record? ? "New Project" : "Edit Project" %>
+  </h1>
 
-      <ul class="list-disc ml-6">
+  <% if project.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-700 border border-red-200 px-4 py-3 rounded-md mb-6 shadow-sm">
+      <h2 class="font-semibold mb-2">
+        <%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:
+      </h2>
+      <ul class="list-disc list-inside space-y-1">
         <% project.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
@@ -11,47 +16,60 @@
     </div>
   <% end %>
 
-  <div class="my-5">
-    <%= form.label :name %>
-    <%= form.text_field :name, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": project.errors[:name].none?, "border-red-400 focus:outline-red-600": project.errors[:name].any?}] %>
+  <%# Form Fields %>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <%# Name %>
+    <div>
+      <%= form.label :name, class: "font-medium text-gray-700 block mb-1" %>
+      <%= form.text_field :name, class: form_field_class(project.errors[:name].any?) %>
+    </div>
+
+    <%# Location %>
+    <div>
+      <%= form.label :location, class: "font-medium text-gray-700 block mb-1" %>
+      <%= form.text_field :location, class: form_field_class(project.errors[:location].any?) %>
+    </div>
+
+    <%# Developer %>
+    <div>
+      <%= form.label :developer, class: "font-medium text-gray-700 block mb-1" %>
+      <%= form.text_field :developer, class: form_field_class(project.errors[:developer].any?) %>
+    </div>
+
+    <%# Status %>
+    <div>
+      <%= form.label :status, class: "font-medium text-gray-700 block mb-1" %>
+      <%= form.text_field :status, class: form_field_class(project.errors[:status].any?) %>
+    </div>
+
+    <%# Total Units %>
+    <div>
+      <%= form.label :total_units, class: "font-medium text-gray-700 block mb-1" %>
+      <%= form.number_field :total_units, class: form_field_class(project.errors[:total_units].any?) %>
+    </div>
+
+    <%# Completion Date %>
+    <div>
+      <%= form.label :completion_date, class: "font-medium text-gray-700 block mb-1" %>
+      <%= form.date_field :completion_date, class: form_field_class(project.errors[:completion_date].any?) %>
+    </div>
   </div>
 
-  <div class="my-5">
-    <%= form.label :location %>
-    <%= form.text_field :location, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": project.errors[:location].none?, "border-red-400 focus:outline-red-600": project.errors[:location].any?}] %>
+  <%# Description (Full width) %>
+  <div class="mt-6">
+    <%= form.label :description, class: "font-medium text-gray-700 block mb-1" %>
+    <%= form.rich_textarea :description, class: form_field_class(project.errors[:description].any?) %>
   </div>
 
-  <div class="my-5">
-    <%= form.label :developer %>
-    <%= form.text_field :developer, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": project.errors[:developer].none?, "border-red-400 focus:outline-red-600": project.errors[:developer].any?}] %>
+  <%# Images Upload %>
+  <div class="mt-6">
+    <%= form.label :images, class: "font-medium text-gray-700 block mb-1" %>
+    <%= form.file_field :images, multiple: true, class: form_field_class(project.errors[:images].any?) %>
   </div>
 
-  <div class="my-5">
-    <%= form.label :status %>
-    <%= form.text_field :status, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": project.errors[:status].none?, "border-red-400 focus:outline-red-600": project.errors[:status].any?}] %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :total_units %>
-    <%= form.number_field :total_units, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": project.errors[:total_units].none?, "border-red-400 focus:outline-red-600": project.errors[:total_units].any?}] %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :completion_date %>
-    <%= form.date_field :completion_date, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": project.errors[:completion_date].none?, "border-red-400 focus:outline-red-600": project.errors[:completion_date].any?}] %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :description %>
-    <%= form.rich_textarea :description, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": project.errors[:description].none?, "border-red-400 focus:outline-red-600": project.errors[:description].any?}] %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :images %>
-    <%= form.file_field :images, multiple: true, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": project.errors[:images].none?, "border-red-400 focus:outline-red-600": project.errors[:images].any?}] %>
-  </div>
-
-  <div class="inline">
-    <%= form.submit class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
+  <%# Submit Button %>
+  <div class="mt-8">
+    <%= form.submit (project.new_record? ? "Create Project" : "Update Project"),
+        class: "inline-block bg-blue-600 hover:bg-blue-500 text-white font-semibold px-6 py-3 rounded-md transition duration-300 shadow-sm w-full sm:w-auto" %>
   </div>
 <% end %>
