@@ -22,6 +22,7 @@
 * **Responsive Design**: Mobile-friendly interface with Tailwind CSS for seamless user experience across devices.
 * **Validation and Error Handling**: Robust form validations with user-friendly error messages.
 * **AI Powered Assistant** Baytak is enhanced with AI powered assistant that integrated with app database to improve user experience
+* **Health Checks** Added healthchecks to the server using ```allgood``` gem
 
 ## 🛠 Tech Stack
 
@@ -48,6 +49,7 @@
 
 ![image](https://github.com/user-attachments/assets/a386fba2-aedc-4e08-aab9-3f94e8a6cc9d)
 
+![image](https://github.com/user-attachments/assets/ca7ab0b3-0a63-4d2d-9f84-6f863a1d1a32)
 
 ## 🚀 Getting Started
 
@@ -57,7 +59,7 @@ Ensure you have the following installed:
 
 * Ruby (version 3.0.0 or higher)
 * Rails (version 8.0 or higher)
-* SQLite
+* SQLite3
   
 ### Installation
 
